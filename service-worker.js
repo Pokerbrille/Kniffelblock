@@ -1,5 +1,5 @@
 
-const CACHE_NAME = "kniffelblock-v1";
+const CACHE_NAME = "wuerfelblock-v1";
 
 self.addEventListener("install", event => {
   event.waitUntil(
