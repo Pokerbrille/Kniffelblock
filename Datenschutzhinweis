@@ -1,0 +1,37 @@
+## Datenschutzhinweis
+
+**Stand: November 2026**
+
+Würfelblock ist ein privates, nicht-kommerzielles Projekt. Der Schutz deiner Daten ist uns wichtig.
+
+### 1. Speicherung von Daten
+
+Würfelblock benötigt kein Benutzerkonto und keine Registrierung.
+
+Spielernamen, Punktestände, Spielverläufe, Statistiken und persönliche Einstellungen werden ausschließlich lokal im Speicher deines Browsers (`localStorage`) auf deinem Gerät gespeichert.
+
+Diese Daten werden nicht durch Würfelblock an einen eigenen Server übertragen.
+
+### 2. Keine Analyse- oder Werbedienste
+
+Würfelblock verwendet nach aktuellem Stand keine eigenen Analyse-, Tracking- oder Werbedienste.
+
+### 3. Hosting über GitHub Pages
+
+Die Anwendung wird über GitHub Pages bereitgestellt. Beim Aufruf der Website werden technisch notwendige Verbindungsdaten, beispielsweise deine IP-Adresse, vom Hosting-Anbieter verarbeitet. Auf diese Verarbeitung hat Würfelblock keinen unmittelbaren Einfluss.
+
+Weitere Informationen findest du in der [Datenschutzerklärung von GitHub](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
+
+### 4. Lokale Daten löschen
+
+Du kannst deine gespeicherten Spielstände und Einstellungen jederzeit über die entsprechenden Funktionen in der App oder durch Löschen der Website-Daten in deinem Browser entfernen.
+
+### 5. Kontakt
+
+Würfelblock ist ein privates Open-Source-Projekt.
+
+Bei Fragen zum Datenschutz kannst du dich über das GitHub-Repository an den Betreiber wenden.
+
+---
+
+*Dieser Datenschutzhinweis beschreibt die derzeitige technische Funktionsweise von Würfelblock.*
