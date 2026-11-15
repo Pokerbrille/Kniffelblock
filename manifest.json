@@ -1,8 +1,8 @@
 
 {
-  "name": "Kniffelblock – Yatzy To Go",
-  "short_name": "Kniffelblock",
-  "description": "Dein digitaler Kniffel- und Yatzy-Block",
+  "name": "Würfelblock – Yatzy To Go",
+  "short_name": "Würfelblock",
+  "description": "Dein digitaler Würfel-Block mit Standardspieleinstellungen",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
