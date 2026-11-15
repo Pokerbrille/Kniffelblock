@@ -1,11 +1,23 @@
+
 <!DOCTYPE html>
-<html lang="de"><head>
+<html lang="de">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
 <title>Kniffelblock</title>
+
+<!-- PWA Einstellungen -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#3347ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Kniffelblock">
+
 <meta name="robots" content="noindex,nofollow">
 
 <style>
+
 :root{--paper:#f7f8fc;--ink:#1a2140;--accent:#3347ff;--on:#fff;--gold:#ffc93c;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#171b2e;--ink:#eef0fb;--accent:#7a89ff;--on:#10142a}}
@@ -230,8 +242,20 @@ $('#stats').addEventListener('click',e=>{const b=e.target.closest('#bClr');if(b)
 document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;VIEW=+b.dataset.t;
  $('#t1').classList.toggle('on',VIEW==1);$('#t2').classList.toggle('on',VIEW==2);
  $('#blk').hidden=VIEW!=1;$('#rank').hidden=VIEW!=1;$('#stats').hidden=VIEW!=2;stats()});
+
 render();
 </script>
 
+<!-- PWA Service Worker starten -->
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(error => console.error("PWA Fehler:", error));
+  });
+}
+</script>
 
-</body></html>
+</body>
+</html>
+
