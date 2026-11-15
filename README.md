@@ -1,4 +1,4 @@
-# 🎲 Yatzy/Kniffel To Go – Always With You!
+# 🎲 DiceScore like Yatzy/*niffel To Go – Always With You!
 
 **Your favorite dice game. Anytime. Anywhere.**
 
@@ -16,10 +16,7 @@ No more paper score sheets or pencils! Yatzy To Go brings the classic dice game 
 
 ## 🚀 Getting Started
 
-1. Download or clone this repository.
-2. Open `Kniffelblock_bereinigt.html` in your browser.
-3. Add your players.
-4. Roll the dice, enter your scores, and have fun!
+Roll the dice, enter your scores, and have fun!
 
 No installation, no account, and no complicated setup required.
 
