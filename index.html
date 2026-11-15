@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<title>Kniffelblock</title>
+<title>Würfelblock</title>
 
 <!-- PWA Einstellungen -->
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#3347ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Kniffelblock">
+<meta name="apple-mobile-web-app-title" content="Würfelblock">
 
 <meta name="robots" content="noindex,nofollow">
 
@@ -88,7 +88,7 @@ input[type=color]{width:46px;height:40px;border:2px solid var(--ink);border-radi
 </head>
 <body>
 <header>
-  <h1><span class="die"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span id="gameTitle">Kniffel</span></h1>
+  <h1><span class="die"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span id="gameTitle">Gniffel</span></h1>
   <div class="row" style="margin:0"><button class="bt" id="bNew">Neues Spiel</button><button class="bt pri" id="bSet">Einstellungen</button></div>
 </header>
 <div class="tabs"><button class="tab on" id="t1" data-t="1">Block</button><button class="tab" id="t2" data-t="2">Statistik</button></div>
@@ -100,13 +100,13 @@ input[type=color]{width:46px;height:40px;border:2px solid var(--ink);border-radi
 <div class="ov" id="ovSet" hidden><div class="pn" id="set"></div></div>
 
 <script>
-const $=s=>document.querySelector(s),KEY='kniffelblock-v1';
+const $=s=>document.querySelector(s),KEY='würfelblock-v1';
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const upper=()=>['Einser','Zweier','Dreier','Vierer','Fünfer','Sechser'].map((n,i)=>({id:'u'+(i+1),name:n,sec:'u',t:'m',v:i+1}));
 const std=()=>upper().concat([
  {id:'l1',name:'Dreierpasch',sec:'l',t:'s',v:0},{id:'l2',name:'Viererpasch',sec:'l',t:'s',v:0},
  {id:'l3',name:'Full House',sec:'l',t:'f',v:25},{id:'l4',name:'Kleine Straße',sec:'l',t:'f',v:30},
- {id:'l5',name:'Große Straße',sec:'l',t:'f',v:40},{id:'l6',name:'Kniffel',sec:'l',t:'f',v:50},{id:'l7',name:'Chance',sec:'l',t:'s',v:0}]);
+ {id:'l5',name:'Große Straße',sec:'l',t:'f',v:40},{id:'l6',name:'Gniffel',sec:'l',t:'f',v:50},{id:'l7',name:'Chance',sec:'l',t:'s',v:0}]);
 const stdYatzy=()=>upper().concat([
  {id:'l1',name:'Ein Paar',sec:'l',t:'y',rule:'pair',v:0},{id:'l2',name:'Zwei Paare',sec:'l',t:'y',rule:'twoPairs',v:0},
  {id:'l3',name:'Dreierpasch',sec:'l',t:'y',rule:'three',v:0},{id:'l4',name:'Viererpasch',sec:'l',t:'y',rule:'four',v:0},
@@ -114,10 +114,10 @@ const stdYatzy=()=>upper().concat([
  {id:'l7',name:'Große Straße',sec:'l',t:'y',rule:'large',v:20},{id:'l8',name:'Chance',sec:'l',t:'y',rule:'chance',v:0},
  {id:'l9',name:'Yatzy',sec:'l',t:'y',rule:'yatzy',v:50}]);
 const mk=i=>({n:'Spieler '+i,s:{}});
-const fresh=()=>({players:[mk(1),mk(2)],fields:std(),variant:'kniffel',bonus:{on:true,thr:63,val:35},theme:null});
+const fresh=()=>({players:[mk(1),mk(2)],fields:std(),variant:'gniffel',bonus:{on:true,thr:63,val:35},theme:null});
 let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
 if(!S||!S.players)S=fresh();
-S.variant=S.variant||'kniffel';
+S.variant=S.variant||'gniffel';
 S.hist=S.hist||[];let VIEW=1;
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const PRE=[['Klassisch','#3347ff','#f7f8fc','#1a2140'],['Rot','#d62839','#fffaf5','#2b1414'],['Minze','#0e8f7e','#f0f8f6','#10312c'],['Beere','#c2185b','#fdf2f7','#2c1020'],['Sonne','#f08a00','#fff8e8','#2d2410'],['Nacht','#ff8a4c','#1b1a24','#f4efe6']];
@@ -129,7 +129,7 @@ function applyTheme(){const r=document.documentElement.style,t=S.theme;
  r.setProperty('--on',L>150?'#1a1a1a':'#fff');}
 function calc(p){let u=0,l=0;S.fields.forEach(f=>{const v=p.s[f.id]||0;f.sec=='u'?u+=v:l+=v});
  const b=S.bonus.on&&u>=S.bonus.thr?S.bonus.val:0;return{u,l,b,total:u+b+l}}
-function render(){applyTheme();$('#gameTitle').textContent=S.variant==='yatzy'?'Yatzy':'Kniffel';document.title=S.variant==='yatzy'?'Yatzyblock':'Kniffelblock';const P=S.players,T=P.map(calc),max=Math.max(...T.map(t=>t.total));
+function render(){applyTheme();$('#gameTitle').textContent=S.variant==='yatzy'?'Yatzy':'Gniffel';document.title=S.variant==='yatzy'?'Yatzyblock':'Würfelblock';const P=S.players,T=P.map(calc),max=Math.max(...T.map(t=>t.total));
  $('#rank').innerHTML=P.map((p,i)=>({p,i,t:T[i].total})).sort((a,b)=>b.t-a.t).map((x,k)=>`<div class="chip${k==0&&max>0?' lead':''}" style="--pc:${pcol(x.i)}"><span class="dot"></span>${esc(x.p.n)} <b>${x.t}</b></div>`).join('');
  const cell=(f,p,i)=>{const v=p.s[f.id];return `<td><button class="c${v===0?' z':''}" data-p="${i}" data-f="${esc(f.id)}" aria-label="${esc(f.name)}, ${esc(p.n)}">${v==null?'':v===0?'✗':v}</button></td>`};
  const frow=f=>`<tr><th class="lab" scope="row">${esc(f.name)}${f.t=='f'||(f.t=='y'&&['small','large','yatzy'].includes(f.rule))?`<small>${f.v}</small>`:''}</th>${P.map((p,i)=>cell(f,p,i)).join('')}</tr>`;
@@ -190,7 +190,7 @@ function renderSet(){const th=S.theme||{accent:getComputedStyle(document.documen
  ${f.t=='y'?`<select data-k="yr" data-i="${i}">${Object.entries(YRULE).map(([k,v])=>`<option value="${k}"${f.rule==k?' selected':''}>${v}</option>`).join('')}</select>`:''}
  <select data-k="fs" data-i="${i}"><option value="u"${f.sec=='u'?' selected':''}>Oben</option><option value="l"${f.sec!='u'?' selected':''}>Unten</option></select>
  <button class="bt ib" data-a="fup" data-i="${i}" aria-label="Nach oben">↑</button><button class="bt ib" data-a="fdn" data-i="${i}" aria-label="Nach unten">↓</button><button class="bt ib" data-a="fdel" data-i="${i}" aria-label="Entfernen">✕</button></div>`).join('')}
- <div class="row"><button class="bt" data-a="fadd">+ Feld</button><button class="bt warn" data-a="fstd">Standard-Kniffel</button><button class="bt warn" data-a="ystd">Standard-Yatzy</button></div>
+ <div class="row"><button class="bt" data-a="fadd">+ Feld</button><button class="bt warn" data-a="fstd">Standard-Gniffel</button><button class="bt warn" data-a="ystd">Standard-Yatzy</button></div>
  <h3>Bonus</h3><div class="row"><label class="row" style="margin:0"><input type="checkbox" data-k="bo" ${S.bonus.on?'checked':''}> Bonus aktiv</label>
  ab <input type="number" min="0" value="${S.bonus.thr}" data-k="bt"> Punkten oben gibt es <input type="number" min="0" value="${S.bonus.val}" data-k="bv"></div>
  <h3>Farben</h3><div class="row">${PRE.map((p,i)=>`<button class="sw" data-a="pre" data-i="${i}" title="${p[0]}" aria-label="${p[0]}" style="background:linear-gradient(135deg,${p[1]} 50%,${p[2]} 50%)"></button>`).join('')}</div>
@@ -211,7 +211,7 @@ SB.addEventListener('change',e=>{const t=e.target,k=t.dataset.k,i=+t.dataset.i;i
 SB.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,i=+b.dataset.i,F=S.fields;
  if(a=='done'){show('#ovSet',false);return}
  if(a=='allclr'){twice(b,'Wirklich alle Daten löschen?',()=>{localStorage.removeItem(KEY);S=fresh();S.hist=[];render();renderSet()});return}
- if(a=='fstd'||a=='ystd'){const yatzy=a=='ystd';twice(b,'Wirklich wechseln?',()=>{S.fields=yatzy?stdYatzy():std();S.variant=yatzy?'yatzy':'kniffel';S.players.forEach(p=>p.s={});S.bonus={on:true,thr:63,val:yatzy?25:35};render();renderSet()});return}
+ if(a=='fstd'||a=='ystd'){const yatzy=a=='ystd';twice(b,'Wirklich wechseln?',()=>{S.fields=yatzy?stdYatzy():std();S.variant=yatzy?'yatzy':'gniffel';S.players.forEach(p=>p.s={});S.bonus={on:true,thr:63,val:yatzy?25:35};render();renderSet()});return}
  if(a=='padd'&&S.players.length<10)S.players.push(mk(S.players.length+1));
  else if(a=='pdel')S.players.splice(i,1);
  else if(a=='fadd')F.push({id:'x'+Date.now(),name:'Neues Feld',sec:'l',t:'f',v:20});
@@ -227,9 +227,9 @@ function stats(){if(VIEW!=2)return;const H=S.hist,el=$('#stats');
  const M={},FN=[];
  H.forEach(g=>{const mx=Math.max(...g.p.map(x=>x.t));g.f.forEach(f=>{if(!FN.includes(f.n))FN.push(f.n)});
   g.p.forEach(x=>{const m=M[x.n]=M[x.n]||{g:0,w:0,sum:0,best:0,k:0,F:{}};m.g++;m.sum+=x.t;m.best=Math.max(m.best,x.t);if(x.t==mx)m.w++;
-   g.f.forEach(f=>{const v=x.s[f.id];if(v==null)return;const a=m.F[f.n]=m.F[f.n]||[0,0];a[0]+=v;a[1]++;if(/^(kniffel|yatzy)$/i.test(f.n)&&v>0)m.k++})})});
+   g.f.forEach(f=>{const v=x.s[f.id];if(v==null)return;const a=m.F[f.n]=m.F[f.n]||[0,0];a[0]+=v;a[1]++;if(/^(gniffel|yatzy)$/i.test(f.n)&&v>0)m.k++})})});
  const N=Object.keys(M).sort((a,b)=>M[b].w-M[a].w||M[b].sum/M[b].g-M[a].sum/M[a].g);
- let h=`<h4>Rangliste (${H.length} Spiele)</h4><table><thead><tr><th class="lab">Spieler</th><th>Spiele</th><th>Siege</th><th>Quote</th><th>Ø Punkte</th><th>Bestwert</th><th>Kniffel / Yatzy</th></tr></thead><tbody>`+
+ let h=`<h4>Rangliste (${H.length} Spiele)</h4><table><thead><tr><th class="lab">Spieler</th><th>Spiele</th><th>Siege</th><th>Quote</th><th>Ø Punkte</th><th>Bestwert</th><th>Gniffel / Yatzy</th></tr></thead><tbody>`+
  N.map(n=>{const m=M[n];return `<tr><th class="lab" scope="row">${esc(n)}</th><td>${m.g}</td><td>${m.w}</td><td>${Math.round(m.w/m.g*100)} %</td><td>${fmt(m.sum/m.g)}</td><td>${m.best}</td><td>${m.k}</td></tr>`}).join('')+'</tbody></table>';
  h+=`<h4>Durchschnitt pro Feld</h4><table><thead><tr><th class="lab">Feld</th>${N.map(n=>`<th>${esc(n)}</th>`).join('')}</tr></thead><tbody>`+
  FN.map(fn=>{const av=N.map(n=>{const a=M[n].F[fn];return a?a[0]/a[1]:null}),mx=Math.max(...av.map(v=>v==null?-1:v));
